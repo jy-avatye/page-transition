@@ -24,3 +24,125 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 페이지 전환 애니메이션 - Forward (페이지 1 → 2: 위로 슬라이드) */
+html.forward::view-transition-old(root) {
+  animation: slide-out-up 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.forward::view-transition-new(root) {
+  animation: slide-in-up 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 페이지 전환 애니메이션 - Backward (페이지 2 → 1: 아래로 슬라이드) */
+html.backward::view-transition-old(root) {
+  animation: slide-out-down 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.backward::view-transition-new(root) {
+  animation: slide-in-down 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 위로 올라가는 애니메이션 */
+@keyframes slide-out-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
+@keyframes slide-in-up {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* 아래로 내려가는 애니메이션 */
+@keyframes slide-out-down {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes slide-in-down {
+  from {
+    transform: translateY(-100vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Fallback 애니메이션 (View Transitions 미지원 브라우저용) */
+.page-transition-overlay {
+  position: fixed;
+  top: 100vh;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: inherit;
+  z-index: 9999;
+  animation: slide-overlay-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.page-transition-overlay.reverse {
+  animation: slide-overlay-down 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slide-overlay-up {
+  from {
+    top: 100vh;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@keyframes slide-overlay-down {
+  from {
+    top: -100vh;
+  }
+  to {
+    top: 0;
+  }
+}
+
+/* 페이드인 애니메이션 */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 슬라이드인 애니메이션 */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.8s ease-out;
+}
