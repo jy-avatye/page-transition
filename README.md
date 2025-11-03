@@ -39,7 +39,7 @@ Next.js 16 App Router를 사용한 부드러운 페이지 전환 애니메이션
 
 ### 2. Progressive Enhancement
 - **최신 브라우저**: View Transitions API 사용
-- **구형 브라우저**: CSS 애니메이션 기반 Fallback 제공
+- **구형 브라우저**: CSS 애니메이션 기반 Fallback 제공 (Fallback은 아직 테스트해보지 못했습니다.)
 
 ## 데이터 흐름 (Flow Diagram)
 
@@ -52,7 +52,7 @@ useViewTransition Hook
     ↓
 브라우저 API 지원 체크
     ↓
-    ├─→ [지원 O] View Transitions API
+    ├─→ [브라우저 지원 O] View Transitions API
     │       ↓
     │   1. HTML에 방향 클래스 추가 (forward/backward)
     │   2. document.startViewTransition() 실행
@@ -60,7 +60,7 @@ useViewTransition Hook
     │   4. CSS 애니메이션 자동 적용
     │   5. 애니메이션 완료 후 클래스 제거
     │
-    └─→ [지원 X] Fallback
+    └─→ [브라우저 지원 X] Fallback
             ↓
         1. 오버레이 DOM 요소 생성
         2. CSS 클래스 추가 (애니메이션 트리거)
